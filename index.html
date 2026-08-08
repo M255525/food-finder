@@ -28,7 +28,10 @@ body.has-marquee{padding-top:34px}
 header.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--panel);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:900;flex-wrap:wrap;gap:10px}
 body.has-marquee header.topbar{top:34px}
 .brand{font-size:1.35rem;font-weight:700;display:flex;align-items:center;gap:8px}
-.topbar-tools{display:flex;align-items:center;gap:10px}
+.brand-sub{font-size:.82rem;font-weight:700;color:var(--accent);margin-top:2px}
+.topbar-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.manual-link{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:10px;padding:.5em .9em;font-size:1rem;font-weight:700;text-decoration:none;color:var(--ink);min-height:44px}
+.manual-link:hover{background:var(--chip-bg)}
 .fontsize-group{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
 .fontsize-group button{background:var(--panel);border:none;color:var(--ink);padding:.5em .8em;font-size:1rem;cursor:pointer;border-right:1px solid var(--line)}
 .fontsize-group button:last-child{border-right:none}
@@ -95,6 +98,14 @@ main{max-width:760px;margin:0 auto;padding:16px 14px 60px}
 
 .empty-state{text-align:center;color:var(--muted);padding:34px 12px;font-size:1.05rem;line-height:1.8}
 
+.about-panel h2{margin-top:0}
+.about-panel h2 + h2{margin-top:18px}
+.about-panel ul{margin:0;padding-left:1.3em;line-height:1.75}
+.about-panel li{margin-bottom:6px;font-size:1rem}
+.about-panel p{margin:6px 0;font-size:1rem}
+.batch-heading{font-size:1.05rem;font-weight:700;color:var(--accent);margin:18px 0 10px;padding-top:4px;border-top:1px dashed var(--line)}
+.batch-heading:first-child{border-top:none;padding-top:0;margin-top:0}
+
 footer.foot{text-align:center;color:var(--muted);font-size:.92rem;padding:22px 14px 44px;line-height:1.8}
 </style>
 </head>
@@ -102,18 +113,23 @@ footer.foot{text-align:center;color:var(--muted);font-size:.92rem;padding:22px 1
 <div id="marqueeBar"><div id="marqueeTrack"></div></div>
 
 <div class="warning-banner">
+  📍 <b>本工具目前僅提供台北市與新北市地區的美食推薦服務，其他地區暫不支援。</b><br>
   ⚠ 本工具僅供教學與個人使用，禁止未經授權公開發布、販售或商業化使用。<br>
   ⚠ 以下建議清單<b>全部由 AI 依其既有知識生成，不是即時查詢的真實資料</b>，店家可能已歇業、搬遷、地址或距離不準確；出發前請務必自行上網或致電查證，本工具不對消費結果負責。
 </div>
 
 <header class="topbar">
-  <div class="brand">🍜 巷口美食通</div>
+  <div>
+    <div class="brand">🍜 巷口美食通</div>
+    <div class="brand-sub">📍 目前僅服務台北市・新北市地區</div>
+  </div>
   <div class="topbar-tools">
     <div class="fontsize-group" id="fontSizeGroup" role="group" aria-label="文字大小">
       <button type="button" data-value="sm">小</button>
       <button type="button" data-value="md">中</button>
       <button type="button" data-value="lg">大</button>
     </div>
+    <a href="manual.html" target="_blank" class="manual-link" title="操作手冊">📖 操作手冊</a>
     <button id="settingsBtn" class="icon-btn" title="設定 AI 服務金鑰">⚙️</button>
   </div>
 </header>
@@ -173,8 +189,20 @@ footer.foot{text-align:center;color:var(--muted);font-size:.92rem;padding:22px 1
       </div>
 
       <div id="locMrt" class="loc-panel" style="display:none">
-        <input type="text" id="mrtInput" list="mrtDatalist" placeholder="輸入或選擇捷運站名稱，例如：市政府">
-        <datalist id="mrtDatalist"></datalist>
+        <div class="row2">
+          <div class="field" style="margin-bottom:0">
+            <label>① 先選路線</label>
+            <select id="mrtLineSelect">
+              <option value="">請選擇路線</option>
+            </select>
+          </div>
+          <div class="field" style="margin-bottom:0">
+            <label>② 再選站別</label>
+            <select id="mrtStationSelect" disabled>
+              <option value="">請先選擇路線</option>
+            </select>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -232,6 +260,20 @@ footer.foot{text-align:center;color:var(--muted);font-size:.92rem;padding:22px 1
   <section id="resultsSection" style="display:none">
     <div class="results-header" id="resultsCount"></div>
     <div id="resultsList"></div>
+    <button id="moreBtn" class="inline-btn" type="button" style="display:none;width:100%;margin-top:6px">🔄 都不滿意？繼續搜尋其他餐飲</button>
+  </section>
+
+  <section class="panel about-panel">
+    <h2>⚠ 使用須知</h2>
+    <ul>
+      <li>本工具目前僅提供<b>台北市與新北市</b>地區的美食推薦服務。</li>
+      <li>本工具僅供教學與個人使用，禁止未經授權公開發布、販售或商業化使用。</li>
+      <li>建議清單由 AI 依既有知識生成，<b>不是即時查詢的真實資料</b>，店家可能已歇業、搬遷、地址或距離不準確，出發前請務必自行上網或致電查證。</li>
+      <li>本工具與創作者不對依本工具建議所做的消費決策或任何後續結果負責。</li>
+    </ul>
+    <h2>👤 創作者資料</h2>
+    <p>Mark Tsai（蔡豐全）｜<a href="mailto:tsaimark@gmail.com">tsaimark@gmail.com</a></p>
+    <p><a href="manual.html" target="_blank">📖 查看完整操作手冊、隱私說明與創作者經歷</a></p>
   </section>
 
 </main>
@@ -407,13 +449,33 @@ wireSingleChipGroup('locModeGroup', 'locMode', function(mode){
 $('locModeGroup').querySelector('[data-value=address]').classList.add('active');
 $('locAddress').style.display = 'block';
 
-/* ---------- 捷運站資料（僅作為地名清單使用，不做座標計算） ---------- */
+/* ---------- 捷運站資料（僅作為地名清單使用，不做座標計算）：先選路線再選站別，避免138站平鋪選單造成混亂 ---------- */
+var MRT_LINE_ORDER = ['板南線','淡水信義線','松山新店線','中和新蘆線','文湖線','環狀線','安坑輕軌','淡海輕軌'];
 (function initMrtOptions(){
   var list = window.MRT_STATIONS || [];
-  var dl = $('mrtDatalist');
-  dl.innerHTML = list.map(function(s){
-    return '<option value="' + escapeHtml(s.name) + '">' + escapeHtml((s.lines||[]).join('/')) + '</option>';
+  var linesPresent = new Set();
+  list.forEach(function(s){ (s.lines||[]).forEach(function(l){ linesPresent.add(l); }); });
+  var orderedLines = MRT_LINE_ORDER.filter(function(l){ return linesPresent.has(l); });
+
+  var lineSel = $('mrtLineSelect');
+  lineSel.innerHTML = '<option value="">請選擇路線</option>' + orderedLines.map(function(l){
+    return '<option value="' + escapeHtml(l) + '">' + escapeHtml(l) + '</option>';
   }).join('');
+
+  lineSel.addEventListener('change', function(){
+    var stationSel = $('mrtStationSelect');
+    var line = lineSel.value;
+    if(!line){
+      stationSel.innerHTML = '<option value="">請先選擇路線</option>';
+      stationSel.disabled = true;
+      return;
+    }
+    var stations = list.filter(function(s){ return (s.lines||[]).indexOf(line) !== -1; });
+    stationSel.innerHTML = '<option value="">請選擇站別</option>' + stations.map(function(s){
+      return '<option value="' + escapeHtml(s.name) + '">' + escapeHtml(s.name) + '</option>';
+    }).join('');
+    stationSel.disabled = false;
+  });
 })();
 function findMrtStation(name){
   name = (name||'').trim();
@@ -430,9 +492,10 @@ function resolveLocationLabel(){
     return addr;
   }
   if(S.locMode === 'mrt'){
-    var st = findMrtStation($('mrtInput').value);
-    if(!st) throw new Error('請從清單中選擇一個有效的捷運站');
-    return '捷運' + st.name + '站附近';
+    if(!$('mrtLineSelect').value) throw new Error('請先選擇捷運路線');
+    var st = findMrtStation($('mrtStationSelect').value);
+    if(!st) throw new Error('請選擇捷運站別');
+    return '捷運' + st.name + '站';
   }
   throw new Error('請選擇所在區域的輸入方式');
 }
@@ -507,8 +570,11 @@ function extractJsonObject(text){
   return JSON.parse(cleaned.slice(start, end + 1));
 }
 
-function buildRecommendationPrompt(ctx){
+function buildRecommendationPrompt(ctx, excludedNames){
   var radiusText = ctx.radius >= 1000 ? (ctx.radius/1000) + ' 公里' : ctx.radius + ' 公尺';
+  var excludeLine = (excludedNames && excludedNames.length)
+    ? ('\n這些店家已經推薦過，這次請不要重複，改推薦其他選項：' + excludedNames.join('、') + '\n')
+    : '';
   return '你是一位熟悉台北與新北地區美食的在地朋友，請根據以下條件推薦實際存在、你有把握資訊大致正確的店家。\n\n'
     + '條件：\n'
     + '地點：' + ctx.location + '\n'
@@ -517,10 +583,10 @@ function buildRecommendationPrompt(ctx){
     + '參考人數：' + ctx.people + ' 人\n'
     + '預算偏好：' + (ctx.budget || '不限') + '\n'
     + '美食類型偏好：' + (ctx.foodTypes.length ? ctx.foodTypes.join('、') : '不限') + '\n'
-    + '其他需求：' + (ctx.freeText || '無') + '\n\n'
-    + '請推薦 6～8 家店，依推薦順序排列。如果你對某家店的細節沒有把握，請誠實在備註中寫「請自行查證」，寧可少列幾家、標註不確定，也絕對不要編造不存在的店名或捏造精確地址、電話。\n\n'
+    + '其他需求：' + (ctx.freeText || '無') + excludeLine + '\n\n'
+    + '請推薦 6～8 家店，依推薦順序排列。如果你對某家店的細節沒有把握，請誠實在對應欄位寫「請自行查證」或「沒有」，寧可少列幾家、標註不確定，也絕對不要編造不存在的店名或捏造精確地址、電話、評價。\n\n'
     + '請只輸出 JSON，不要 markdown 圍欄，格式固定如下：\n'
-    + '{"places":[{"name":"店名","category":"類型，例如：早餐店/咖啡廳/中式餐廳","distanceHint":"約XXX公尺，或寫請自行查證","priceHint":"平價／中等／高價／不確定","locationHint":"大概位置描述，例如：捷運市政府站2號出口附近","reason":"一句話白話推薦理由，30字以內"}]}';
+    + '{"places":[{"name":"店名","category":"類型，例如：早餐店/咖啡廳/中式餐廳","distanceHint":"約XXX公尺，或寫請自行查證","priceHint":"平價／中等／高價／不確定","ratingHint":"你所知的評價星等，例如：4.5顆星、五星好評；不確定或沒有相關資訊請直接寫「沒有」，不要虛構數字","locationHint":"大概位置描述，例如：捷運市政府站2號出口附近","reason":"一句話白話推薦理由，30字以內"}]}';
 }
 
 /* ---------- 主流程 ---------- */
@@ -531,7 +597,13 @@ function clearBanner(){ $('statusArea').innerHTML = ''; }
 function setLoading(text){ showBanner('loading', text); }
 
 var searchBtn = $('searchBtn');
-function setBusy(busy){ searchBtn.disabled = busy; searchBtn.textContent = busy ? 'AI 思考中…' : '請 AI 幫我推薦'; }
+var moreBtn = $('moreBtn');
+function setBusy(busy, viaMore){
+  searchBtn.disabled = busy;
+  moreBtn.disabled = busy;
+  if(!viaMore) searchBtn.textContent = busy ? 'AI 思考中…' : '請 AI 幫我推薦';
+  moreBtn.textContent = (busy && viaMore) ? 'AI 思考中…' : '🔄 都不滿意？繼續搜尋其他餐飲';
+}
 
 function collectFormState(location){
   var mealLabels = {breakfast:'早餐', lunch:'午餐', dinner:'晚餐'};
@@ -546,36 +618,54 @@ function collectFormState(location){
   };
 }
 
-function renderResults(places, ctx){
+/* 一次 LLM 回應視為「一批」，若使用者都不滿意可以按「繼續搜尋」拿新的一批，
+   舊的批次仍保留在畫面上（不是取代），並標示「第N批」讓使用者知道目前看到第幾輪建議。 */
+var batches = [];        // [{index, places}]
+var excludedNames = [];  // 已出現過的店名，餵給下一次請求避免重複
+var lastCtx = null;
+
+function renderBatches(){
   var section = $('resultsSection');
-  if(!places.length){
+  var totalPlaces = batches.reduce(function(sum, b){ return sum + b.places.length; }, 0);
+
+  if(!batches.length || totalPlaces === 0){
     section.style.display = 'block';
     $('resultsCount').textContent = 'AI 沒有給出符合條件的建議';
     $('resultsList').innerHTML = '<div class="empty-state">試試看放寬距離範圍、拿掉部分篩選條件，或換一個地點再問一次。</div>';
+    moreBtn.style.display = 'none';
     return;
   }
-  section.style.display = 'block';
-  $('resultsCount').textContent = 'AI 為你推薦了 ' + places.length + ' 家店（' + ctx.location + ' 附近）';
 
-  $('resultsList').innerHTML = places.map(function(p){
-    var verifyUrl = 'https://www.google.com/search?q=' + encodeURIComponent(p.name + ' ' + ctx.location);
-    return '<article class="result-card">'
-      + '<div class="card-top"><h3>' + escapeHtml(p.name || '(未提供店名)') + '</h3>'
-      + (p.category ? '<span class="category-badge">' + escapeHtml(p.category) + '</span>' : '') + '</div>'
-      + '<div class="card-meta">'
-      + (p.distanceHint ? '<span>📏 ' + escapeHtml(p.distanceHint) + '</span>' : '')
-      + (p.priceHint ? '<span>💰 ' + escapeHtml(p.priceHint) + '</span>' : '')
-      + '</div>'
-      + (p.locationHint ? '<div class="card-location">📍 ' + escapeHtml(p.locationHint) + '</div>' : '')
-      + (p.reason ? '<div class="card-reason"><span class="ai-flag">AI 建議</span>💡 ' + escapeHtml(p.reason) + '</div>' : '')
-      + '<div class="card-verify"><a href="' + verifyUrl + '" target="_blank" rel="noopener">🔍 上網查證這家店是否還在營業</a></div>'
-      + '</article>';
+  section.style.display = 'block';
+  $('resultsCount').textContent = 'AI 目前共為你推薦了 ' + totalPlaces + ' 家店（' + lastCtx.location + ' 附近）';
+
+  $('resultsList').innerHTML = batches.map(function(b){
+    var heading = '<div class="batch-heading">🔎 第 ' + b.index + ' 批建議</div>';
+    if(!b.places.length){
+      return heading + '<div class="empty-state">這一批 AI 找不到不重複的新店家了，試試看放寬篩選條件。</div>';
+    }
+    var cards = b.places.map(function(p){
+      var verifyUrl = 'https://www.google.com/search?q=' + encodeURIComponent(p.name + ' ' + lastCtx.location);
+      return '<article class="result-card">'
+        + '<div class="card-top"><h3>' + escapeHtml(p.name || '(未提供店名)') + '</h3>'
+        + (p.category ? '<span class="category-badge">' + escapeHtml(p.category) + '</span>' : '') + '</div>'
+        + '<div class="card-meta">'
+        + (p.distanceHint ? '<span>📏 ' + escapeHtml(p.distanceHint) + '</span>' : '')
+        + (p.priceHint ? '<span>💰 ' + escapeHtml(p.priceHint) + '</span>' : '')
+        + '<span>⭐ ' + escapeHtml(p.ratingHint || '沒有') + '</span>'
+        + '</div>'
+        + (p.locationHint ? '<div class="card-location">📍 ' + escapeHtml(p.locationHint) + '</div>' : '')
+        + (p.reason ? '<div class="card-reason"><span class="ai-flag">AI 建議</span>💡 ' + escapeHtml(p.reason) + '</div>' : '')
+        + '<div class="card-verify"><a href="' + verifyUrl + '" target="_blank" rel="noopener">🔍 上網查證這家店是否還在營業</a></div>'
+        + '</article>';
+    }).join('');
+    return heading + cards;
   }).join('');
+
+  moreBtn.style.display = 'block';
 }
 
-$('searchBtn').addEventListener('click', async function(){
-  clearBanner();
-  $('resultsSection').style.display = 'none';
+async function runSearch(isMore){
   var settings = loadSettings();
   if(!settings.llmProvider || !settings.llmKey){
     showBanner('error', '請先按右上角「⚙️」設定 AI 服務金鑰');
@@ -583,24 +673,44 @@ $('searchBtn').addEventListener('click', async function(){
     return;
   }
 
-  setBusy(true);
+  setBusy(true, isMore);
   try{
-    var location = resolveLocationLabel();
-    var ctx = collectFormState(location);
+    var ctx;
+    if(isMore){
+      ctx = lastCtx;
+    } else {
+      var location = resolveLocationLabel();
+      ctx = collectFormState(location);
+      lastCtx = ctx;
+      batches = [];
+      excludedNames = [];
+    }
 
-    setLoading('AI 正在為你尋找附近的美食，請稍候…');
-    var text = await callLLM(settings.llmProvider, settings.llmModel, settings.llmKey, buildRecommendationPrompt(ctx));
+    setLoading(isMore ? 'AI 正在尋找其他推薦，請稍候…' : 'AI 正在為你尋找附近的美食，請稍候…');
+    var text = await callLLM(settings.llmProvider, settings.llmModel, settings.llmKey, buildRecommendationPrompt(ctx, excludedNames));
     var parsed = extractJsonObject(text);
     var places = Array.isArray(parsed.places) ? parsed.places : [];
+    // 保險起見，前端再濾一次已出現過的店名（同名視為重複，AI 仍可能沒完全照指示排除）
+    places = places.filter(function(p){ return excludedNames.indexOf(p.name) === -1; });
+
+    batches.push({index: batches.length + 1, places: places});
+    excludedNames = excludedNames.concat(places.map(function(p){ return p.name; }));
 
     clearBanner();
-    renderResults(places, ctx);
+    renderBatches();
   }catch(e){
     showBanner('error', e.message || String(e));
   }finally{
-    setBusy(false);
+    setBusy(false, isMore);
   }
+}
+
+$('searchBtn').addEventListener('click', function(){
+  clearBanner();
+  $('resultsSection').style.display = 'none';
+  runSearch(false);
 });
+$('moreBtn').addEventListener('click', function(){ runSearch(true); });
 
 })();
 </script>
