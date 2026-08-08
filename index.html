@@ -6,96 +6,96 @@
 <title>巷口美食通</title>
 <style>
 :root{
-  --bg:#fdf7ef; --panel:#ffffff; --ink:#2b2016; --muted:#8a7a68; --line:#ecdfcd;
-  --accent:#d9622b; --accent-ink:#ffffff; --accent-soft:#f6e2d3;
-  --good:#2f8f6f; --bad:#c0392b; --chip-bg:#f4e9da; --shadow:0 2px 10px rgba(43,32,22,.08);
+  --bg:#fdf7ef; --panel:#ffffff; --ink:#241b10; --muted:#6c5c48; --line:#e6d5bd;
+  --accent:#c8551f; --accent-ink:#ffffff; --accent-soft:#f6e2d3;
+  --good:#1f7a58; --bad:#a72c1b; --chip-bg:#f4e9da; --shadow:0 2px 10px rgba(43,32,22,.08);
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.5}
+html{font-size:118%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.6;font-size:1.05rem}
 a{color:var(--accent)}
 button{font-family:inherit}
 
 /* 頂部跑馬燈：一般頁面，固定於頂端，出現時把 body 往下推 */
-#marqueeBar{position:fixed;top:0;left:0;right:0;height:30px;background:var(--panel);border-bottom:1px solid var(--line);z-index:2100;overflow:hidden;display:none;align-items:center}
+#marqueeBar{position:fixed;top:0;left:0;right:0;height:34px;background:var(--panel);border-bottom:1px solid var(--line);z-index:2100;overflow:hidden;display:none;align-items:center}
 #marqueeBar.show{display:flex}
-#marqueeTrack{display:inline-block;white-space:nowrap;padding-left:100%;font-size:13px;font-weight:600;color:var(--accent);animation:marquee-scroll 30s linear infinite}
-body.has-marquee{padding-top:30px}
+#marqueeTrack{display:inline-block;white-space:nowrap;padding-left:100%;font-size:.95rem;font-weight:600;color:var(--accent);animation:marquee-scroll 30s linear infinite}
+body.has-marquee{padding-top:34px}
 @keyframes marquee-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-.warning-banner{background:#fff3e6;border-bottom:1px solid #f0d3ae;color:#7a4a1c;font-size:.82rem;padding:8px 16px;text-align:center}
+.warning-banner{background:#fff3e6;border-bottom:1px solid #f0d3ae;color:#6a3d10;font-size:.95rem;padding:10px 16px;text-align:center;line-height:1.7}
 
-header.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--panel);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:900}
-body.has-marquee header.topbar{top:30px}
-.brand{font-size:1.15rem;display:flex;align-items:center;gap:8px}
-.icon-btn{background:none;border:1px solid var(--line);border-radius:10px;width:38px;height:38px;font-size:1.1rem;cursor:pointer}
+header.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--panel);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:900;flex-wrap:wrap;gap:10px}
+body.has-marquee header.topbar{top:34px}
+.brand{font-size:1.35rem;font-weight:700;display:flex;align-items:center;gap:8px}
+.topbar-tools{display:flex;align-items:center;gap:10px}
+.fontsize-group{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.fontsize-group button{background:var(--panel);border:none;color:var(--ink);padding:.5em .8em;font-size:1rem;cursor:pointer;border-right:1px solid var(--line)}
+.fontsize-group button:last-child{border-right:none}
+.fontsize-group button.active{background:var(--accent);color:#fff;font-weight:700}
+.icon-btn{background:none;border:1px solid var(--line);border-radius:10px;min-width:44px;min-height:44px;font-size:1.2rem;cursor:pointer}
 .icon-btn:hover{background:var(--chip-bg)}
 
 main{max-width:760px;margin:0 auto;padding:16px 14px 60px}
 
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px;box-shadow:var(--shadow)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px;box-shadow:var(--shadow)}
 .panel.hidden{display:none}
-.panel h2{margin:0 0 4px;font-size:1.02rem}
-.panel .sub{color:var(--muted);font-size:.82rem;margin:0 0 12px}
+.panel h2{margin:0 0 6px;font-size:1.2rem}
+.panel .sub{color:var(--muted);font-size:.95rem;margin:0 0 14px}
 
-.field{margin-bottom:14px}
-.field label{display:block;font-size:.85rem;font-weight:600;margin-bottom:6px;color:#5c4a35}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:1.02rem;font-weight:700;margin-bottom:8px;color:#4a3620}
 .field input[type=text],.field input[type=password],.field input[type=number],.field select,.field textarea{
-  width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:9px;font-size:.92rem;background:#fffdfa;color:var(--ink)
+  width:100%;padding:.7em .7em;border:1px solid var(--line);border-radius:9px;font-size:1.05rem;background:#fffdfa;color:var(--ink)
 }
-.field textarea{resize:vertical;min-height:56px}
-.field-hint{font-size:.76rem;color:var(--muted);margin-top:4px}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.field textarea{resize:vertical;min-height:4.5em}
+.field-hint{font-size:.9rem;color:var(--muted);margin-top:6px;line-height:1.6}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media (max-width:480px){.row2{grid-template-columns:1fr}}
 
-.chip-group{display:flex;flex-wrap:wrap;gap:8px}
-.chip{border:1px solid var(--line);background:var(--chip-bg);color:#6c5738;border-radius:999px;padding:7px 14px;font-size:.85rem;cursor:pointer;user-select:none}
-.chip.active{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.chip-group{display:flex;flex-wrap:wrap;gap:10px}
+.chip{border:1px solid var(--line);background:var(--chip-bg);color:#5a4630;border-radius:999px;padding:.6em 1.15em;font-size:1rem;cursor:pointer;user-select:none;min-height:44px;display:inline-flex;align-items:center}
+.chip.active{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}
 .chip:hover{filter:brightness(0.97)}
 
-.inline-btn{border:1px solid var(--accent);background:#fff;color:var(--accent);border-radius:9px;padding:9px 14px;font-size:.88rem;cursor:pointer;white-space:nowrap}
+.inline-btn{border:1px solid var(--accent);background:#fff;color:var(--accent);border-radius:9px;padding:.65em 1.1em;font-size:1rem;font-weight:700;cursor:pointer;white-space:nowrap;min-height:44px}
 .inline-btn:hover{background:var(--accent-soft)}
 .inline-btn:disabled{opacity:.5;cursor:default}
 
-.primary-btn{width:100%;background:var(--accent);color:#fff;border:none;border-radius:11px;padding:13px;font-size:1rem;font-weight:700;cursor:pointer;box-shadow:var(--shadow)}
+.primary-btn{width:100%;background:var(--accent);color:#fff;border:none;border-radius:11px;padding:.9em;font-size:1.2rem;font-weight:700;cursor:pointer;box-shadow:var(--shadow);min-height:52px}
 .primary-btn:hover{filter:brightness(1.05)}
 .primary-btn:disabled{opacity:.55;cursor:default}
 
-.save-btn{background:var(--accent);color:#fff;border:none;border-radius:9px;padding:9px 16px;font-size:.9rem;cursor:pointer}
-.ghost-btn{background:none;border:1px solid var(--line);border-radius:9px;padding:9px 16px;font-size:.9rem;cursor:pointer}
+.save-btn{background:var(--accent);color:#fff;border:none;border-radius:9px;padding:.7em 1.3em;font-size:1.05rem;font-weight:700;cursor:pointer;min-height:44px}
+.ghost-btn{background:none;border:1px solid var(--line);border-radius:9px;padding:.7em 1.3em;font-size:1.05rem;cursor:pointer;min-height:44px}
 
-.status-line{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted);margin-top:6px}
-.status-line.ok{color:var(--good)}
-.status-line.err{color:var(--bad)}
+.status-line{display:flex;align-items:center;gap:8px;font-size:.98rem;color:var(--muted);margin-top:8px}
+.status-line.ok{color:var(--good);font-weight:700}
+.status-line.err{color:var(--bad);font-weight:700}
 
 #statusArea{margin-bottom:12px}
-.banner{border-radius:10px;padding:10px 14px;font-size:.88rem;margin-bottom:8px}
-.banner.error{background:#fbeae8;color:#8a2e1f;border:1px solid #f0bcb2}
-.banner.warn{background:#fff3e0;color:#7a4a10;border:1px solid #f0d3ae}
-.banner.loading{background:#eef3f1;color:#2f5c4d;border:1px solid #cfe3db}
+.banner{border-radius:10px;padding:12px 16px;font-size:1rem;margin-bottom:8px;line-height:1.6}
+.banner.error{background:#fbeae8;color:#7a2415;border:1px solid #f0bcb2}
+.banner.warn{background:#fff3e0;color:#6a4008;border:1px solid #f0d3ae}
+.banner.loading{background:#eef3f1;color:#204538;border:1px solid #cfe3db}
 
-.results-header{display:flex;align-items:center;justify-content:space-between;margin:4px 0 12px;font-size:.9rem;color:#5c4a35}
-.results-header select{padding:6px 8px;border-radius:8px;border:1px solid var(--line);font-size:.85rem}
+.results-header{margin:6px 0 14px;font-size:1.05rem;color:#4a3620;font-weight:700}
 
-.result-card{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:14px;margin-bottom:12px;box-shadow:var(--shadow)}
-.result-card.ai-pick{border-color:var(--accent)}
-.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
-.card-top h3{margin:0;font-size:1.05rem}
-.card-top h3 a{text-decoration:none}
-.card-top h3 a:hover{text-decoration:underline}
-.dist-badge{flex:0 0 auto;background:var(--chip-bg);color:#6c5738;border-radius:999px;padding:3px 10px;font-size:.78rem;white-space:nowrap}
-.card-meta{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0;font-size:.85rem;color:#5c4a35}
-.card-meta .open.yes{color:var(--good);font-weight:600}
-.card-meta .open.no{color:var(--bad);font-weight:600}
-.card-address{font-size:.83rem;color:var(--muted)}
-.card-types{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.type-tag{background:#f2ede4;color:#7a6a52;font-size:.72rem;border-radius:6px;padding:2px 7px}
-.card-reason{margin-top:10px;font-size:.85rem;padding:8px 10px;border-radius:8px;background:#f7f2ea}
-.card-reason.ai{background:#fdf0e8;color:#7a3d16}
-.ai-flag{display:inline-block;background:var(--accent);color:#fff;font-size:.7rem;border-radius:6px;padding:1px 6px;margin-right:6px;vertical-align:1px}
+.result-card{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+.card-top h3{margin:0;font-size:1.25rem}
+.category-badge{flex:0 0 auto;background:var(--chip-bg);color:#5a4630;border-radius:999px;padding:.3em .9em;font-size:.95rem;white-space:nowrap;font-weight:700}
+.card-meta{display:flex;flex-wrap:wrap;gap:14px;margin:10px 0;font-size:1rem;color:#4a3620}
+.card-location{font-size:.98rem;color:var(--muted)}
+.card-reason{margin-top:12px;font-size:1.03rem;padding:10px 12px;border-radius:8px;background:#fdf0e8;color:#6a3410;line-height:1.65}
+.ai-flag{display:inline-block;background:var(--accent);color:#fff;font-size:.85rem;border-radius:6px;padding:.15em .6em;margin-right:8px;font-weight:700}
+.card-verify{margin-top:10px}
+.card-verify a{font-size:.98rem;font-weight:700;text-decoration:none;border:1px solid var(--accent);border-radius:8px;padding:.45em 1em;display:inline-block}
+.card-verify a:hover{background:var(--accent-soft)}
 
-.empty-state{text-align:center;color:var(--muted);padding:30px 10px;font-size:.9rem}
+.empty-state{text-align:center;color:var(--muted);padding:34px 12px;font-size:1.05rem;line-height:1.8}
 
-footer.foot{text-align:center;color:var(--muted);font-size:.78rem;padding:20px 14px 40px}
+footer.foot{text-align:center;color:var(--muted);font-size:.92rem;padding:22px 14px 44px;line-height:1.8}
 </style>
 </head>
 <body>
@@ -103,30 +103,30 @@ footer.foot{text-align:center;color:var(--muted);font-size:.78rem;padding:20px 1
 
 <div class="warning-banner">
   ⚠ 本工具僅供教學與個人使用，禁止未經授權公開發布、販售或商業化使用。<br>
-  ⚠ 店家評分／營業時間／價位由 Google Places 即時提供，AI 推薦理由為模型生成，皆<b>僅供參考</b>，實際情況請以店家現場公告為準，本工具不對消費結果負責。
+  ⚠ 以下建議清單<b>全部由 AI 依其既有知識生成，不是即時查詢的真實資料</b>，店家可能已歇業、搬遷、地址或距離不準確；出發前請務必自行上網或致電查證，本工具不對消費結果負責。
 </div>
 
 <header class="topbar">
-  <div class="brand">🍜 <strong>巷口美食通</strong></div>
-  <button id="settingsBtn" class="icon-btn" title="設定 API 金鑰">⚙️</button>
+  <div class="brand">🍜 巷口美食通</div>
+  <div class="topbar-tools">
+    <div class="fontsize-group" id="fontSizeGroup" role="group" aria-label="文字大小">
+      <button type="button" data-value="sm">小</button>
+      <button type="button" data-value="md">中</button>
+      <button type="button" data-value="lg">大</button>
+    </div>
+    <button id="settingsBtn" class="icon-btn" title="設定 AI 服務金鑰">⚙️</button>
+  </div>
 </header>
 
 <main>
 
   <section id="settingsPanel" class="panel hidden">
-    <h2>設定</h2>
-    <p class="sub">金鑰只存在這台電腦的瀏覽器（localStorage），不會送到本工具以外的任何地方；查詢時會直接連線到 Google 與你選擇的 AI 服務商。請勿在共用電腦上填寫金鑰。</p>
+    <h2>設定 AI 服務</h2>
+    <p class="sub">本工具只需要一把「語言模型」的 API 金鑰即可使用，不需要申請 Google 地圖服務。金鑰只存在這台電腦的瀏覽器裡，不會送到本工具以外的任何地方；查詢時會直接連線到你選擇的 AI 服務商。請勿在共用電腦上填寫金鑰。</p>
 
     <div class="field">
-      <label>Google Maps API 金鑰（必填）</label>
-      <input type="password" id="mapsKeyInput" placeholder="貼上你的 Google Maps API Key" autocomplete="off">
-      <p class="field-hint">需在 Google Cloud Console 開通「Maps JavaScript API」與「Places API」並設定帳單，詳見 <a href="manual.html" target="_blank">操作手冊</a>。</p>
-    </div>
-
-    <div class="field">
-      <label>AI 服務（選填，用來理解自由文字需求＋產生推薦理由）</label>
+      <label>AI 服務商</label>
       <select id="llmProviderSelect">
-        <option value="">不使用 AI（純規則篩選與排序）</option>
         <option value="claude">Claude（Anthropic）</option>
         <option value="openai">OpenAI</option>
         <option value="gemini">Gemini（Google AI Studio）</option>
@@ -139,12 +139,13 @@ footer.foot{text-align:center;color:var(--muted);font-size:.78rem;padding:20px 1
         <input type="text" id="llmModelInput" placeholder="模型名稱">
       </div>
       <div class="field">
-        <label>AI API 金鑰</label>
+        <label>API 金鑰</label>
         <input type="password" id="llmKeyInput" placeholder="貼上該服務商的 API Key" autocomplete="off">
       </div>
     </div>
+    <p class="field-hint">還沒有金鑰嗎？請見 <a href="manual.html" target="_blank">操作手冊</a> 的申請步驟說明。</p>
 
-    <div style="display:flex;gap:10px;justify-content:flex-end">
+    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px">
       <button id="settingsCancelBtn" class="ghost-btn">關閉</button>
       <button id="settingsSaveBtn" class="save-btn">儲存設定</button>
     </div>
@@ -162,39 +163,29 @@ footer.foot{text-align:center;color:var(--muted);font-size:.78rem;padding:20px 1
 
     <div class="field">
       <label>所在區域</label>
-      <div class="chip-group" id="locModeGroup" style="margin-bottom:10px">
-        <span class="chip" data-value="geo">📍 使用目前定位</span>
+      <div class="chip-group" id="locModeGroup" style="margin-bottom:12px">
         <span class="chip" data-value="address">🏠 輸入地址／地標</span>
         <span class="chip" data-value="mrt">🚇 選捷運站</span>
       </div>
 
-      <div id="locGeo" class="loc-panel" style="display:none">
-        <button id="geoBtn" class="inline-btn" type="button">📍 取得目前位置</button>
-        <div id="geoStatus" class="status-line"></div>
-      </div>
-
       <div id="locAddress" class="loc-panel" style="display:none">
-        <div style="display:flex;gap:8px">
-          <input type="text" id="addressInput" placeholder="例如：台北市信義區松高路11號">
-          <button id="addressBtn" class="inline-btn" type="button">定位</button>
-        </div>
-        <div id="addressStatus" class="status-line"></div>
+        <input type="text" id="addressInput" placeholder="例如：台北市信義區市府路、西門町">
       </div>
 
       <div id="locMrt" class="loc-panel" style="display:none">
         <input type="text" id="mrtInput" list="mrtDatalist" placeholder="輸入或選擇捷運站名稱，例如：市政府">
         <datalist id="mrtDatalist"></datalist>
-        <div id="mrtStatus" class="status-line"></div>
       </div>
     </div>
 
     <div class="field">
-      <label>搜尋半徑</label>
+      <label>距離偏好</label>
       <div class="chip-group" id="radiusGroup">
-        <span class="chip" data-value="300">300 公尺</span>
-        <span class="chip" data-value="500">500 公尺</span>
-        <span class="chip" data-value="1000">1 公里</span>
+        <span class="chip" data-value="300">300 公尺內</span>
+        <span class="chip" data-value="500">500 公尺內</span>
+        <span class="chip" data-value="1000">1 公里內</span>
       </div>
+      <p class="field-hint">AI 會盡量在這個範圍內推薦，但這是估計值、不是精確測量的距離。</p>
     </div>
 
     <div class="row2">
@@ -203,20 +194,14 @@ footer.foot{text-align:center;color:var(--muted);font-size:.78rem;padding:20px 1
         <input type="number" id="peopleInput" min="1" max="30" value="2">
       </div>
       <div class="field">
-        <label style="display:flex;align-items:center;gap:6px;margin-top:22px">
-          <input type="checkbox" id="openNowChk" style="width:auto"> 只看目前營業中
-        </label>
+        <label>預算</label>
+        <select id="budgetSelect">
+          <option value="">不限</option>
+          <option value="平價">平價</option>
+          <option value="中等">中等</option>
+          <option value="高價">高價</option>
+        </select>
       </div>
-    </div>
-
-    <div class="field">
-      <label>預算（可複選，不選代表不限）</label>
-      <div class="chip-group" id="budgetGroup">
-        <span class="chip" data-value="cheap">平價</span>
-        <span class="chip" data-value="mid">中等</span>
-        <span class="chip" data-value="high">高價</span>
-      </div>
-      <p class="field-hint">台灣店家的價位資料在 Google 上常缺漏，此篩選僅供參考，未提供價位的店家不會被排除。</p>
     </div>
 
     <div class="field">
@@ -237,29 +222,22 @@ footer.foot{text-align:center;color:var(--muted);font-size:.78rem;padding:20px 1
     <div class="field">
       <label>我的需求（選填）</label>
       <textarea id="freeTextInput" placeholder="例如：想吃辣的、不要排隊、想找適合聚餐的空間"></textarea>
-      <p class="field-hint" id="aiHint" style="display:none">已偵測到 AI 金鑰：送出後會先請 AI 理解這段需求，再用來搜尋與挑選店家。</p>
     </div>
 
-    <button id="searchBtn" class="primary-btn">開始搜尋</button>
+    <button id="searchBtn" class="primary-btn">請 AI 幫我推薦</button>
   </section>
 
   <section id="statusArea"></section>
 
   <section id="resultsSection" style="display:none">
-    <div class="results-header">
-      <span id="resultsCount"></span>
-      <select id="sortSelect">
-        <option value="rating">評分高→低</option>
-        <option value="distance">距離近→遠</option>
-      </select>
-    </div>
+    <div class="results-header" id="resultsCount"></div>
     <div id="resultsList"></div>
   </section>
 
 </main>
 
 <footer class="foot">
-  巷口美食通 · 純前端運算，地點資料即時查詢 Google Places、不經任何後端伺服器 · 製作：Mark Tsai（詳見 <a href="manual.html" target="_blank">操作手冊</a>）<br>
+  巷口美食通 · 純前端運算，只連線到你自己選擇的 AI 服務商、不經任何後端伺服器 · 製作：Mark Tsai（詳見 <a href="manual.html" target="_blank">操作手冊</a>）<br>
   本工具僅供教學與個人使用，禁止未經授權公開發布、販售或商業化使用。
 </footer>
 
@@ -318,7 +296,27 @@ function escapeHtml(s){
   });
 }
 
-/* ---------- 設定（Google Maps 金鑰 ＋ LLM BYOK） ---------- */
+/* ---------- 文字大小（樂齡／上班族使用者可自行調整） ---------- */
+var FONT_SCALE_KEY = 'foodFinderFontScale';
+var FONT_SCALES = {sm:'100%', md:'118%', lg:'136%'};
+function applyFontScale(key){
+  if(!FONT_SCALES[key]) key = 'md';
+  document.documentElement.style.fontSize = FONT_SCALES[key];
+  $('fontSizeGroup').querySelectorAll('button').forEach(function(b){
+    b.classList.toggle('active', b.dataset.value === key);
+  });
+  try{ localStorage.setItem(FONT_SCALE_KEY, key); }catch(e){}
+}
+$('fontSizeGroup').querySelectorAll('button').forEach(function(b){
+  b.addEventListener('click', function(){ applyFontScale(b.dataset.value); });
+});
+(function(){
+  var saved = 'md';
+  try{ saved = localStorage.getItem(FONT_SCALE_KEY) || 'md'; }catch(e){}
+  applyFontScale(saved);
+})();
+
+/* ---------- 設定（單一 LLM API 金鑰，BYOK） ---------- */
 var SETTINGS_KEY = 'foodFinderSettings';
 var AI_PROVIDERS = {
   claude:     {label:'Claude（Anthropic）',       defaultModel:'claude-opus-4-8'},
@@ -336,9 +334,8 @@ function saveSettings(s){
 
 function openSettings(){
   var s = loadSettings();
-  $('mapsKeyInput').value = s.mapsKey || '';
-  $('llmProviderSelect').value = (s.llmProvider && AI_PROVIDERS[s.llmProvider]) ? s.llmProvider : '';
-  $('llmModelInput').value = s.llmModel || (AI_PROVIDERS[$('llmProviderSelect').value] ? AI_PROVIDERS[$('llmProviderSelect').value].defaultModel : '');
+  $('llmProviderSelect').value = (s.llmProvider && AI_PROVIDERS[s.llmProvider]) ? s.llmProvider : 'claude';
+  $('llmModelInput').value = s.llmModel || AI_PROVIDERS[$('llmProviderSelect').value].defaultModel;
   $('llmKeyInput').value = s.llmKey || '';
   $('settingsPanel').classList.remove('hidden');
 }
@@ -350,31 +347,24 @@ $('llmProviderSelect').addEventListener('change', function(){
   var p = this.value;
   var modelEl = $('llmModelInput');
   var isDefault = Object.keys(AI_PROVIDERS).some(function(k){ return AI_PROVIDERS[k].defaultModel === modelEl.value.trim(); });
-  if(p && (!modelEl.value.trim() || isDefault)) modelEl.value = AI_PROVIDERS[p].defaultModel;
+  if(!modelEl.value.trim() || isDefault) modelEl.value = AI_PROVIDERS[p].defaultModel;
 });
 $('settingsSaveBtn').addEventListener('click', function(){
   var s = {
-    mapsKey: $('mapsKeyInput').value.trim(),
     llmProvider: $('llmProviderSelect').value,
     llmModel: $('llmModelInput').value.trim(),
     llmKey: $('llmKeyInput').value.trim()
   };
   saveSettings(s);
   closeSettings();
-  updateAiHint();
 });
-function updateAiHint(){
-  var s = loadSettings();
-  $('aiHint').style.display = (s.llmProvider && s.llmKey) ? 'block' : 'none';
-}
-updateAiHint();
+if(!loadSettings().llmKey) openSettings();
 
 /* ---------- 表單狀態（chip 群組） ---------- */
 var S = {
   meal: 'breakfast',
-  locMode: 'geo',
+  locMode: 'address',
   radius: 500,
-  budget: new Set(),
   foodTypes: new Set()
 };
 
@@ -403,7 +393,6 @@ function wireMultiChipGroup(containerId, stateSet){
 
 wireSingleChipGroup('mealGroup', 'meal');
 wireSingleChipGroup('radiusGroup', 'radius');
-wireMultiChipGroup('budgetGroup', S.budget);
 wireMultiChipGroup('foodTypeGroup', S.foodTypes);
 
 // 預設選取
@@ -411,21 +400,20 @@ $('mealGroup').querySelector('[data-value=breakfast]').classList.add('active');
 $('radiusGroup').querySelector('[data-value="500"]').classList.add('active');
 
 wireSingleChipGroup('locModeGroup', 'locMode', function(mode){
-  ['geo','address','mrt'].forEach(function(m){
+  ['address','mrt'].forEach(function(m){
     $('loc' + m.charAt(0).toUpperCase() + m.slice(1)).style.display = (m===mode) ? 'block' : 'none';
   });
 });
-$('locModeGroup').querySelector('[data-value=geo]').classList.add('active');
-$('locGeo').style.display = 'block';
+$('locModeGroup').querySelector('[data-value=address]').classList.add('active');
+$('locAddress').style.display = 'block';
 
-/* ---------- 捷運站資料 ---------- */
+/* ---------- 捷運站資料（僅作為地名清單使用，不做座標計算） ---------- */
 (function initMrtOptions(){
   var list = window.MRT_STATIONS || [];
   var dl = $('mrtDatalist');
-  var html = list.map(function(s){
+  dl.innerHTML = list.map(function(s){
     return '<option value="' + escapeHtml(s.name) + '">' + escapeHtml((s.lines||[]).join('/')) + '</option>';
   }).join('');
-  dl.innerHTML = html;
 })();
 function findMrtStation(name){
   name = (name||'').trim();
@@ -435,178 +423,18 @@ function findMrtStation(name){
   return null;
 }
 
-/* ---------- 定位相關 ---------- */
-function setStatusLine(elId, text, cls){
-  var el = $(elId);
-  el.textContent = text || '';
-  el.className = 'status-line' + (cls ? (' ' + cls) : '');
-}
-
-function getCurrentLocation(){
-  return new Promise(function(resolve, reject){
-    if(!navigator.geolocation){ reject(new Error('此瀏覽器不支援定位功能，請改用「輸入地址」或「選捷運站」')); return; }
-    navigator.geolocation.getCurrentPosition(
-      function(pos){ resolve({lat: pos.coords.latitude, lng: pos.coords.longitude, label: '目前位置'}); },
-      function(err){
-        var msg = '定位失敗';
-        if(err.code === 1) msg = '已拒絕定位權限，請改用「輸入地址」或「選捷運站」';
-        else if(err.code === 2) msg = '目前無法取得位置資訊';
-        else if(err.code === 3) msg = '定位逾時，請再試一次';
-        reject(new Error(msg));
-      },
-      {enableHighAccuracy: true, timeout: 10000, maximumAge: 60000}
-    );
-  });
-}
-
-$('geoBtn').addEventListener('click', function(){
-  setStatusLine('geoStatus', '定位中…');
-  getCurrentLocation().then(function(loc){
-    S.resolvedCenter = loc;
-    setStatusLine('geoStatus', '✓ 已取得目前位置', 'ok');
-  }).catch(function(e){
-    setStatusLine('geoStatus', e.message, 'err');
-  });
-});
-
-function geocodeAddress(address){
-  return new Promise(function(resolve, reject){
-    if(!window.google || !window.google.maps){ reject(new Error('地圖服務尚未載入，請確認已設定 Google Maps 金鑰')); return; }
-    var geocoder = new google.maps.Geocoder();
-    geocoder.geocode({address: address, region: 'tw'}, function(results, status){
-      if(status === 'OK' && results && results[0]){
-        var loc = results[0].geometry.location;
-        resolve({lat: loc.lat(), lng: loc.lng(), label: results[0].formatted_address});
-      } else {
-        reject(new Error('找不到這個地址，請確認輸入是否正確'));
-      }
-    });
-  });
-}
-
-/* ---------- Google Maps JS SDK 動態載入 ---------- */
-var mapsLoadPromise = null;
-window.__ffMapsReady = function(){};
-window.gm_authFailure = function(){
-  showBanner('error', 'Google Maps 金鑰驗證失敗：請確認金鑰正確、已開通「Maps JavaScript API」與「Places API」，且未被 HTTP referrer 限制擋下。');
-  mapsLoadPromise = null;
-};
-function loadGoogleMaps(apiKey){
-  if(window.google && window.google.maps && window.google.maps.places) return Promise.resolve();
-  if(mapsLoadPromise) return mapsLoadPromise;
-  mapsLoadPromise = new Promise(function(resolve, reject){
-    window.__ffMapsReady = function(){ resolve(); };
-    var s = document.createElement('script');
-    s.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(apiKey) + '&libraries=places&v=weekly&callback=__ffMapsReady';
-    s.async = true;
-    s.onerror = function(){ mapsLoadPromise = null; reject(new Error('Google Maps 腳本載入失敗，請檢查網路連線或金鑰是否正確')); };
-    document.head.appendChild(s);
-  });
-  return mapsLoadPromise;
-}
-
-/* ---------- 距離計算 ---------- */
-function haversineMeters(a, b){
-  var R = 6371000;
-  var dLat = (b.lat - a.lat) * Math.PI / 180;
-  var dLng = (b.lng - a.lng) * Math.PI / 180;
-  var la1 = a.lat * Math.PI / 180, la2 = b.lat * Math.PI / 180;
-  var h = Math.sin(dLat/2)*Math.sin(dLat/2) + Math.cos(la1)*Math.cos(la2)*Math.sin(dLng/2)*Math.sin(dLng/2);
-  return 2 * R * Math.asin(Math.sqrt(h));
-}
-
-/* ---------- Places 搜尋（Places API New：google.maps.places.Place.searchNearby）
-   legacy PlacesService 自 2025-03-01 起不再開放新客戶申請，故改用新版 Place 類別。
-   新版 Nearby Search 沒有 keyword 全文檢索參數，半徑限制改用 locationRestriction 的圓形範圍（硬篩選）；
-   價位／營業中／自由文字關鍵字改為抓回結果後在前端做篩選（見 matchesBudget/matchesOpenNow/matchesKeyword）。 ---------- */
-var TYPE_MAP_CHIP = {'咖啡店':'cafe', '烘焙':'bakery', '日式':'japanese_restaurant', '中式':'chinese_restaurant'};
-function buildIncludedTypes(ctx){
-  var mapped = ctx.foodTypes.filter(function(t){ return TYPE_MAP_CHIP[t]; }).map(function(t){ return TYPE_MAP_CHIP[t]; });
-  if(mapped.length) return Array.from(new Set(mapped));
-  if(ctx.meal === 'breakfast') return ['breakfast_restaurant','brunch_restaurant','cafe','bakery','restaurant'];
-  return ['restaurant','cafe','bakery','meal_takeaway'];
-}
-
-async function searchNearbyPlaces(center, opts){
-  var request = {
-    fields: ['displayName','location','rating','userRatingCount','priceLevel','currentOpeningHours','formattedAddress','types','id','googleMapsURI'],
-    locationRestriction: {
-      center: new google.maps.LatLng(center.lat, center.lng),
-      radius: opts.radius
-    },
-    includedTypes: opts.includedTypes,
-    maxResultCount: 20,
-    rankPreference: google.maps.places.SearchNearbyRankPreference.POPULARITY,
-    language: 'zh-TW',
-    region: 'tw'
-  };
-  try{
-    var res = await google.maps.places.Place.searchNearby(request);
-    return (res && res.places) || [];
-  }catch(err){
-    var msg = (err && err.message) || String(err);
-    if(/permission|denied|ApiNotActivated|api key/i.test(msg)) msg = '請求被拒絕，請確認金鑰已開通「Places API (New)」且未被網域/API 限制擋下：' + msg;
-    else if(/quota|RESOURCE_EXHAUSTED/i.test(msg)) msg = 'Google Places API 已超過配額限制，請稍後再試或檢查該金鑰的帳單設定：' + msg;
-    throw new Error('查詢附近店家失敗：' + msg);
+function resolveLocationLabel(){
+  if(S.locMode === 'address'){
+    var addr = $('addressInput').value.trim();
+    if(!addr) throw new Error('請輸入地址或地標名稱');
+    return addr;
   }
-}
-
-var PRICE_LABELS = {FREE:'免費', INEXPENSIVE:'$', MODERATE:'$$', EXPENSIVE:'$$$', VERY_EXPENSIVE:'$$$$'};
-var PRICE_LEVEL_GROUPS = {cheap:['FREE','INEXPENSIVE'], mid:['INEXPENSIVE','MODERATE'], high:['EXPENSIVE','VERY_EXPENSIVE']};
-function allowedPriceLevels(budgetSet){
-  if(!budgetSet.size) return null;
-  var allowed = new Set();
-  budgetSet.forEach(function(k){ (PRICE_LEVEL_GROUPS[k] || []).forEach(function(v){ allowed.add(v); }); });
-  return allowed;
-}
-function matchesBudget(card, allowed){
-  if(!allowed) return true;
-  if(card.priceLevel == null) return true; // 價位資料常缺漏，缺漏不排除
-  return allowed.has(card.priceLevel);
-}
-function matchesOpenNow(card, openNowOnly){
-  if(!openNowOnly) return true;
-  return card.openNow === true;
-}
-function matchesKeyword(card, keywordParts){
-  if(!keywordParts.length) return true;
-  var hay = (card.name + ' ' + card.types.join(' ')).toLowerCase();
-  return keywordParts.some(function(k){ return k && hay.indexOf(String(k).toLowerCase()) !== -1; });
-}
-
-var TYPE_LABELS = {
-  restaurant:'餐廳', cafe:'咖啡廳', bakery:'烘焙', bar:'酒吧', meal_takeaway:'外帶', meal_delivery:'外送', food:'美食',
-  breakfast_restaurant:'早餐店', brunch_restaurant:'早午餐', japanese_restaurant:'日式', chinese_restaurant:'中式',
-  hot_pot_restaurant:'火鍋', vegetarian_restaurant:'素食', noodle_house:'麵食'
-};
-function toCardModel(place, center){
-  var loc = place.location;
-  var latLng = loc ? {lat: (typeof loc.lat === 'function' ? loc.lat() : loc.lat), lng: (typeof loc.lng === 'function' ? loc.lng() : loc.lng)} : null;
-  var dist = latLng ? haversineMeters(center, latLng) : null;
-  var name = (place.displayName && typeof place.displayName === 'object') ? (place.displayName.text || '') : (place.displayName || '(無店名)');
-  return {
-    placeId: place.id,
-    name: name,
-    rating: (typeof place.rating === 'number') ? place.rating : null,
-    ratingCount: place.userRatingCount || 0,
-    priceLevel: place.priceLevel || null,
-    openNow: (place.currentOpeningHours && typeof place.currentOpeningHours.openNow === 'boolean') ? place.currentOpeningHours.openNow : null,
-    address: place.formattedAddress || '',
-    types: (place.types || []).filter(function(t){ return TYPE_LABELS[t]; }).map(function(t){ return TYPE_LABELS[t]; }),
-    distanceM: dist,
-    mapsUrl: place.googleMapsURI || ('https://www.google.com/maps/place/?q=place_id:' + place.id),
-    aiReason: null
-  };
-}
-
-function heuristicReason(card, ctx){
-  var bits = [];
-  if(card.rating != null && card.rating >= 4.3) bits.push('評分高');
-  if(card.distanceM != null && card.distanceM <= 300) bits.push('距離很近');
-  if(card.priceLevel != null && card.priceLevel <= 1) bits.push('價位平實');
-  if(ctx.people >= 4) bits.push('人數較多時建議先確認是否可併桌或訂位');
-  if(!bits.length) bits.push('符合你設定的篩選條件');
-  return bits.join('、');
+  if(S.locMode === 'mrt'){
+    var st = findMrtStation($('mrtInput').value);
+    if(!st) throw new Error('請從清單中選擇一個有效的捷運站');
+    return '捷運' + st.name + '站附近';
+  }
+  throw new Error('請選擇所在區域的輸入方式');
 }
 
 /* ---------- LLM（BYOK） ---------- */
@@ -615,7 +443,7 @@ async function callLLM(provider, model, apiKey, prompt){
   if(provider === 'claude'){
     url = 'https://api.anthropic.com/v1/messages';
     headers = {'content-type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'};
-    body = {model: model, max_tokens: 2000, messages: [{role:'user', content: prompt}]};
+    body = {model: model, max_tokens: 2500, messages: [{role:'user', content: prompt}]};
     extract = function(d){
       var t = (d.content || []).filter(function(b){ return b.type==='text'; }).map(function(b){ return b.text; }).join('');
       if(!t) throw new Error('回應中沒有文字內容');
@@ -665,7 +493,9 @@ async function callLLM(provider, model, apiKey, prompt){
       await new Promise(function(r){ setTimeout(r, 4000); });
       continue;
     }
-    throw new Error('AI API 回應 ' + resp.status + '：' + msg);
+    if(resp.status === 401 || resp.status === 403) msg += '——請確認 API 金鑰是否正確';
+    if(resp.status === 404) msg += '——請確認模型名稱是否正確';
+    throw new Error('AI 服務回應 ' + resp.status + '：' + msg);
   }
 }
 
@@ -677,213 +507,94 @@ function extractJsonObject(text){
   return JSON.parse(cleaned.slice(start, end + 1));
 }
 
-function buildParsePrompt(freeText){
-  return '你是美食搜尋助理。使用者在台北/新北地區想找吃的，以下是他用自然語言描述的需求：\n「' + freeText + '」\n\n'
-    + '請把這段需求轉換成幾個適合拿去地點搜尋引擎當作搜尋關鍵字的詞（例如料理類型、口味、氣氛、場地需求等具體名詞），忽略「附近」「請推薦」這類與搜尋無關的語助詞，也忽略明顯已由其他篩選條件涵蓋的資訊（人數、預算、餐期）。只輸出 JSON，不要 markdown 圍欄：\n'
-    + '{"keywords":["詞1","詞2"]}\n'
-    + '若完全看不出具體偏好，keywords 給空陣列即可。';
-}
-
-function buildSummaryPrompt(candidates, ctx){
-  var list = candidates.map(function(c, i){
-    return (i+1) + '. ' + c.name + '｜評分' + (c.rating!=null ? c.rating : '無') + '(' + c.ratingCount + '則)｜距離' + Math.round(c.distanceM||0) + '公尺｜地址' + c.address + '｜類型' + (c.types.join('/')||'一般餐飲');
-  }).join('\n');
-  return '你是美食推薦顧問。以下是台北/新北地區某個地點附近、已經符合篩選條件的候選店家清單（只能從這份清單裡挑選，不可以編造清單以外的店家）：\n\n'
-    + list + '\n\n'
-    + '使用者情境：餐期=' + ctx.mealLabel + '、參考人數=' + ctx.people + '人'
-    + (ctx.budgetLabel ? '、預算偏好=' + ctx.budgetLabel : '')
-    + (ctx.freeText ? '、需求描述「' + ctx.freeText + '」' : '') + '。\n\n'
-    + '請從清單中挑出最多 5 家最適合的店家，依推薦順序排列，並為每一家寫一句不超過 40 字、白話文的推薦理由（考量評分、距離、人數是否適合、與需求描述的契合度）。只輸出 JSON，不要 markdown 圍欄，name 必須和清單中的店名完全一致：\n'
-    + '{"picks":[{"name":"...","reason":"..."}]}';
+function buildRecommendationPrompt(ctx){
+  var radiusText = ctx.radius >= 1000 ? (ctx.radius/1000) + ' 公里' : ctx.radius + ' 公尺';
+  return '你是一位熟悉台北與新北地區美食的在地朋友，請根據以下條件推薦實際存在、你有把握資訊大致正確的店家。\n\n'
+    + '條件：\n'
+    + '地點：' + ctx.location + '\n'
+    + '距離範圍：約 ' + radiusText + '內（僅供參考，不需要精確測量距離）\n'
+    + '餐期：' + ctx.mealLabel + '\n'
+    + '參考人數：' + ctx.people + ' 人\n'
+    + '預算偏好：' + (ctx.budget || '不限') + '\n'
+    + '美食類型偏好：' + (ctx.foodTypes.length ? ctx.foodTypes.join('、') : '不限') + '\n'
+    + '其他需求：' + (ctx.freeText || '無') + '\n\n'
+    + '請推薦 6～8 家店，依推薦順序排列。如果你對某家店的細節沒有把握，請誠實在備註中寫「請自行查證」，寧可少列幾家、標註不確定，也絕對不要編造不存在的店名或捏造精確地址、電話。\n\n'
+    + '請只輸出 JSON，不要 markdown 圍欄，格式固定如下：\n'
+    + '{"places":[{"name":"店名","category":"類型，例如：早餐店/咖啡廳/中式餐廳","distanceHint":"約XXX公尺，或寫請自行查證","priceHint":"平價／中等／高價／不確定","locationHint":"大概位置描述，例如：捷運市政府站2號出口附近","reason":"一句話白話推薦理由，30字以內"}]}';
 }
 
 /* ---------- 主流程 ---------- */
-var currentCards = [];
-var currentCenter = null;
-
 function showBanner(type, text){
   $('statusArea').innerHTML = '<div class="banner ' + type + '">' + escapeHtml(text) + '</div>';
 }
 function clearBanner(){ $('statusArea').innerHTML = ''; }
-function appendWarningBanner(text){
-  $('statusArea').innerHTML += '<div class="banner warn">' + escapeHtml(text) + '</div>';
-}
 function setLoading(text){ showBanner('loading', text); }
 
 var searchBtn = $('searchBtn');
-function setBusy(busy){ searchBtn.disabled = busy; }
+function setBusy(busy){ searchBtn.disabled = busy; searchBtn.textContent = busy ? 'AI 思考中…' : '請 AI 幫我推薦'; }
 
-async function resolveCenter(){
-  if(S.locMode === 'geo'){
-    if(S.resolvedCenter) return S.resolvedCenter;
-    setStatusLine('geoStatus', '定位中…');
-    var loc = await getCurrentLocation();
-    S.resolvedCenter = loc;
-    setStatusLine('geoStatus', '✓ 已取得目前位置', 'ok');
-    return loc;
-  }
-  if(S.locMode === 'address'){
-    var addr = $('addressInput').value.trim();
-    if(!addr) throw new Error('請輸入地址或地標名稱');
-    setStatusLine('addressStatus', '搜尋地址中…');
-    var g = await geocodeAddress(addr);
-    setStatusLine('addressStatus', '✓ ' + g.label, 'ok');
-    return g;
-  }
-  if(S.locMode === 'mrt'){
-    var st = findMrtStation($('mrtInput').value);
-    if(!st){ setStatusLine('mrtStatus', '請從清單中選擇一個捷運站', 'err'); throw new Error('請從清單中選擇一個有效的捷運站'); }
-    setStatusLine('mrtStatus', '✓ ' + st.name + '站（' + (st.lines||[]).join('/') + '）', 'ok');
-    return {lat: st.lat, lng: st.lng, label: st.name + '站'};
-  }
-  throw new Error('請選擇所在區域的取得方式');
-}
-
-function collectFormState(){
+function collectFormState(location){
   var mealLabels = {breakfast:'早餐', lunch:'午餐', dinner:'晚餐'};
-  var budgetLabels = {cheap:'平價', mid:'中等', high:'高價'};
   return {
-    meal: S.meal,
+    location: location,
     mealLabel: mealLabels[S.meal],
     radius: S.radius,
     people: Math.max(1, parseInt($('peopleInput').value, 10) || 1),
-    budget: Array.from(S.budget),
-    budgetLabel: Array.from(S.budget).map(function(k){ return budgetLabels[k]; }).join('/'),
+    budget: $('budgetSelect').value,
     foodTypes: Array.from(S.foodTypes),
-    freeText: $('freeTextInput').value.trim(),
-    openNowOnly: $('openNowChk').checked
+    freeText: $('freeTextInput').value.trim()
   };
 }
 
-var sortComparators = {
-  rating: function(a, b){
-    if(a.rating == null && b.rating == null) return (a.distanceM||0) - (b.distanceM||0);
-    if(a.rating == null) return 1;
-    if(b.rating == null) return -1;
-    return b.rating - a.rating;
-  },
-  distance: function(a, b){ return (a.distanceM||0) - (b.distanceM||0); }
-};
-
-function renderResults(cards, ctx){
+function renderResults(places, ctx){
   var section = $('resultsSection');
-  if(!cards.length){
+  if(!places.length){
     section.style.display = 'block';
-    $('resultsCount').textContent = '找不到符合條件的店家';
-    $('resultsList').innerHTML = '<div class="empty-state">試試看放寬半徑、拿掉部分篩選條件，或換一個位置再搜尋一次。</div>';
+    $('resultsCount').textContent = 'AI 沒有給出符合條件的建議';
+    $('resultsList').innerHTML = '<div class="empty-state">試試看放寬距離範圍、拿掉部分篩選條件，或換一個地點再問一次。</div>';
     return;
   }
   section.style.display = 'block';
-  $('resultsCount').textContent = '找到 ' + cards.length + ' 家店（半徑 ' + (ctx.radius>=1000 ? (ctx.radius/1000)+' 公里' : ctx.radius+' 公尺') + ' 內）';
+  $('resultsCount').textContent = 'AI 為你推薦了 ' + places.length + ' 家店（' + ctx.location + ' 附近）';
 
-  $('resultsList').innerHTML = cards.map(function(c){
-    var distText = c.distanceM == null ? '距離未知' : (c.distanceM < 1000 ? Math.round(c.distanceM) + ' 公尺' : (c.distanceM/1000).toFixed(1) + ' 公里');
-    var ratingText = c.rating != null ? ('⭐ ' + c.rating.toFixed(1) + '（' + c.ratingCount + ' 則評論）') : '尚無評分';
-    var priceText = (c.priceLevel && PRICE_LABELS[c.priceLevel]) || '價位未提供';
-    var openCls = c.openNow === true ? 'yes' : (c.openNow === false ? 'no' : '');
-    var openText = c.openNow === true ? '🟢 營業中' : (c.openNow === false ? '🔴 休息中' : '⏳ 營業時間未知');
-    var typeTags = c.types.map(function(t){ return '<span class="type-tag">' + escapeHtml(t) + '</span>'; }).join('');
-    var reasonText = c.aiReason || heuristicReason(c, ctx);
-    var reasonCls = c.aiReason ? 'ai' : '';
-    var aiFlag = c.aiReason ? '<span class="ai-flag">AI 推薦</span>' : '';
-    return '<article class="result-card' + (c.aiReason ? ' ai-pick' : '') + '">'
-      + '<div class="card-top"><h3><a href="' + c.mapsUrl + '" target="_blank" rel="noopener">' + escapeHtml(c.name) + '</a></h3><span class="dist-badge">' + distText + '</span></div>'
-      + '<div class="card-meta"><span>' + ratingText + '</span><span>' + priceText + '</span><span class="open ' + openCls + '">' + openText + '</span></div>'
-      + (c.address ? '<div class="card-address">📍 ' + escapeHtml(c.address) + '</div>' : '')
-      + (typeTags ? '<div class="card-types">' + typeTags + '</div>' : '')
-      + '<div class="card-reason ' + reasonCls + '">' + aiFlag + '💡 ' + escapeHtml(reasonText) + '</div>'
+  $('resultsList').innerHTML = places.map(function(p){
+    var verifyUrl = 'https://www.google.com/search?q=' + encodeURIComponent(p.name + ' ' + ctx.location);
+    return '<article class="result-card">'
+      + '<div class="card-top"><h3>' + escapeHtml(p.name || '(未提供店名)') + '</h3>'
+      + (p.category ? '<span class="category-badge">' + escapeHtml(p.category) + '</span>' : '') + '</div>'
+      + '<div class="card-meta">'
+      + (p.distanceHint ? '<span>📏 ' + escapeHtml(p.distanceHint) + '</span>' : '')
+      + (p.priceHint ? '<span>💰 ' + escapeHtml(p.priceHint) + '</span>' : '')
+      + '</div>'
+      + (p.locationHint ? '<div class="card-location">📍 ' + escapeHtml(p.locationHint) + '</div>' : '')
+      + (p.reason ? '<div class="card-reason"><span class="ai-flag">AI 建議</span>💡 ' + escapeHtml(p.reason) + '</div>' : '')
+      + '<div class="card-verify"><a href="' + verifyUrl + '" target="_blank" rel="noopener">🔍 上網查證這家店是否還在營業</a></div>'
       + '</article>';
   }).join('');
 }
-
-$('sortSelect').addEventListener('change', function(){
-  if(!currentCards.length) return;
-  var sorted = currentCards.slice().sort(sortComparators[this.value]);
-  renderResults(sorted, lastCtx);
-});
-
-var lastCtx = null;
 
 $('searchBtn').addEventListener('click', async function(){
   clearBanner();
   $('resultsSection').style.display = 'none';
   var settings = loadSettings();
-  if(!settings.mapsKey){
-    showBanner('error', '請先按右上角「⚙️」設定 Google Maps API 金鑰');
+  if(!settings.llmProvider || !settings.llmKey){
+    showBanner('error', '請先按右上角「⚙️」設定 AI 服務金鑰');
     openSettings();
     return;
   }
 
   setBusy(true);
   try{
-    setLoading('正在準備地圖服務…');
-    await loadGoogleMaps(settings.mapsKey);
+    var location = resolveLocationLabel();
+    var ctx = collectFormState(location);
 
-    setLoading('正在取得搜尋中心點…');
-    var center = await resolveCenter();
-    currentCenter = center;
+    setLoading('AI 正在為你尋找附近的美食，請稍候…');
+    var text = await callLLM(settings.llmProvider, settings.llmModel, settings.llmKey, buildRecommendationPrompt(ctx));
+    var parsed = extractJsonObject(text);
+    var places = Array.isArray(parsed.places) ? parsed.places : [];
 
-    var ctx = collectFormState();
-    lastCtx = ctx;
-
-    // 沒有 Table A 型別可對應的美食類型 chip（火鍋/麵食/西式/素食/小吃）＋自由文字，改用前端關鍵字比對
-    var keywordParts = ctx.foodTypes.filter(function(t){ return !TYPE_MAP_CHIP[t]; });
-    if(ctx.meal === 'breakfast') keywordParts.push('早餐');
-
-    var llmReady = !!(settings.llmProvider && settings.llmKey);
-    if(llmReady && ctx.freeText){
-      try{
-        setLoading('AI 正在理解你的需求…');
-        var parsed = extractJsonObject(await callLLM(settings.llmProvider, settings.llmModel, settings.llmKey, buildParsePrompt(ctx.freeText)));
-        keywordParts = keywordParts.concat(parsed.keywords || []);
-      }catch(e){
-        appendWarningBanner('AI 需求解析失敗（' + e.message + '），已改用關鍵字比對代替');
-        keywordParts.push(ctx.freeText);
-      }
-    } else if(ctx.freeText){
-      keywordParts.push(ctx.freeText);
-    }
-
-    var includedTypes = buildIncludedTypes(ctx);
-
-    setLoading('正在搜尋附近店家…');
-    var raw = await searchNearbyPlaces(center, {radius: ctx.radius, includedTypes: includedTypes});
-    var cards = raw.map(function(p){ return toCardModel(p, center); });
-
-    var allowedPrice = allowedPriceLevels(S.budget);
-    cards = cards.filter(function(c){ return matchesBudget(c, allowedPrice) && matchesOpenNow(c, ctx.openNowOnly); });
-
-    if(!llmReady && keywordParts.length){
-      var kwFiltered = cards.filter(function(c){ return matchesKeyword(c, keywordParts); });
-      if(kwFiltered.length){ cards = kwFiltered; }
-      else { appendWarningBanner('找不到完全符合關鍵字「' + keywordParts.join('、') + '」的店家，已改為顯示範圍內其他候選。'); }
-    }
-
-    cards.sort(sortComparators.rating);
-    $('sortSelect').value = 'rating';
-
-    if(llmReady && cards.length){
-      try{
-        setLoading('AI 正在整理推薦理由…');
-        var summary = extractJsonObject(await callLLM(settings.llmProvider, settings.llmModel, settings.llmKey, buildSummaryPrompt(cards.slice(0, 12), ctx)));
-        var picks = summary.picks || [];
-        var byName = {};
-        cards.forEach(function(c){ if(!byName[c.name]) byName[c.name] = c; });
-        var ranked = [];
-        picks.forEach(function(p){
-          var c = byName[p.name];
-          if(c && ranked.indexOf(c) === -1){ c.aiReason = p.reason; ranked.push(c); }
-        });
-        var rest = cards.filter(function(c){ return ranked.indexOf(c) === -1; });
-        cards = ranked.concat(rest);
-      }catch(e){
-        appendWarningBanner('AI 推薦摘要失敗（' + e.message + '），改用一般排序與規則式推薦理由');
-      }
-    }
-
-    currentCards = cards;
     clearBanner();
-    renderResults(cards, ctx);
+    renderResults(places, ctx);
   }catch(e){
     showBanner('error', e.message || String(e));
   }finally{
