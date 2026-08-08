@@ -107,6 +107,7 @@ main{max-width:760px;margin:0 auto;padding:16px 14px 60px}
 .batch-heading:first-child{border-top:none;padding-top:0;margin-top:0}
 
 footer.foot{text-align:center;color:var(--muted);font-size:.92rem;padding:22px 14px 44px;line-height:1.8}
+.visit-counter{margin-top:8px;font-size:.8rem;color:var(--muted);min-height:1em}
 </style>
 </head>
 <body>
@@ -279,6 +280,7 @@ footer.foot{text-align:center;color:var(--muted);font-size:.92rem;padding:22px 1
 <footer class="foot">
   巷口美食通 · 純前端運算，只連線到你自己選擇的 AI 服務商、不經任何後端伺服器 · 製作：Mark Tsai（詳見 <a href="manual.html" target="_blank">操作手冊</a>）<br>
   本工具僅供教學與個人使用，禁止未經授權公開發布、販售或商業化使用。
+  <div id="visitCounter" class="visit-counter"></div>
 </footer>
 
 <script src="mrt-stations-data.js"></script>
@@ -323,6 +325,35 @@ footer.foot{text-align:center;color:var(--muted);font-size:.92rem;padding:22px 1
   render(loadCache());
   fetchMarquee();
   setInterval(fetchMarquee, REFRESH_MS);
+})();
+</script>
+<script>
+(function () {
+  "use strict";
+  // 免費的 CountAPI 匿名計數器（countapi.mileshilliard.com，無需註冊/金鑰），每次頁面載入呼叫一次 hit 端點累加並取得目前總數。
+  // 純展示用途、非精確訪客統計（是累計載入次數，不是去重後的訪客數）；服務若無法連線就靜默失敗，不影響網站其他功能。
+  // 注意：這是共用的公開 key 空間，key 需夠獨特避免撞到其他使用者的計數器，不要改成通用字串（例如單純 "visits"）。
+  var COUNTER_URL = "https://countapi.mileshilliard.com/api/v1/hit/foodfinder_tsaimark_visits";
+  var CACHE_KEY = "foodFinderVisitCount";
+  var el = document.getElementById("visitCounter");
+  if (!el) return;
+
+  function render(n) {
+    el.textContent = "本站累計瀏覽次數：" + Number(n).toLocaleString("zh-TW");
+  }
+
+  var cached = localStorage.getItem(CACHE_KEY);
+  if (cached) render(cached);
+
+  fetch(COUNTER_URL)
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      if (data && typeof data.value === "number") {
+        localStorage.setItem(CACHE_KEY, String(data.value));
+        render(data.value);
+      }
+    })
+    .catch(function () {});
 })();
 </script>
 <script>

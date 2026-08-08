@@ -47,6 +47,12 @@
 
 與 `ai-video-studio` 系列共用同一個授權伺服器與 Google Sheet，做法比照一般頁面（`position:fixed` + `body.has-marquee{padding-top:34px}`，跑馬燈列高度因整體字級放大而加高），`localStorage` key 為 `foodFinderMarquee`。本工具沒有序號登入機制，頁面載入時直接 POST 空序號取得 `marquee` 欄位。
 
+## 瀏覽次數計數器
+
+`#visitCounter`（頁尾）用免費第三方服務 [CountAPI](https://countapi.mileshilliard.com)（`countapi.mileshilliard.com/api/v1/hit/foodfinder_tsaimark_visits`）記錄**累計頁面載入次數**，不是去重後的訪客數，純展示用途、無認證。`localStorage`（key `foodFinderVisitCount`）快取上次讀到的數字，網路請求失敗時靜默顯示快取值或留空，不拋錯。
+
+**這是 `mentors-panel` 既有做法的直接沿用**（見該專案 CLAUDE.md「瀏覽次數計數器」一節），但**服務商不同**：mentors-panel 原本用的 CounterAPI（`api.counterapi.dev/v1/...`）在本次實作時實測已經回傳 `410 Gone`——v1 已停用，v2 改成需要註冊帳號＋API 金鑰，不再支援匿名呼叫，代表 mentors-panel 那顆計數器現在也已經悄悄失效中（前端設計成失敗即靜默不報錯，使用者/開發者都不會發現）。food-finder 改用另一個目前還活著、格式類似但回傳欄位是 `value` 不是 `count` 的服務（CountAPI，`countapi.mileshilliard.com`，同樣免註冊免金鑰）。**這是公開共用的 key 命名空間**，key 要夠獨特（目前用 `foodfinder_tsaimark_visits`），不要改成 `visits` 這種會撞名的通用字串。若之後這個服務也停用或不穩定，換成別的免費 counter 服務只需要改 `COUNTER_URL` 這一行與回應欄位名稱。
+
 ## 預覽
 
 port **8787**（定義於 `.claude/launch.json`，名稱 `food-finder`）。以 Preview MCP 的 `preview_start` 啟動，或 `python -m http.server 8787 --directory 小工具/food-finder`。
