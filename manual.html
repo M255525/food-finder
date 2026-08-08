@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>巷口美食通 — 操作手冊</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:"Microsoft JhengHei","Noto Sans TC",sans-serif;line-height:1.75;
+  max-width:860px;margin:0 auto;padding:32px 20px 60px;color:#2b2016;background:#fdf7ef}
+@media (prefers-color-scheme:dark){body{color:#f0e6d8;background:#1c1712}
+  table th{background:#2a231b}code{background:#332a1f}pre{background:#241e17}
+  blockquote{border-color:#4a3b27;color:#b3a38a}hr{border-color:#4a3b27}
+  table td,table th{border-color:#4a3b27}a{color:#f0a066}
+  .warn{background:#3a2620;border-color:#7a4a3a}}
+h1{font-size:1.9em;border-bottom:2px solid #ecdfcd;padding-bottom:.3em}
+h2{font-size:1.4em;border-bottom:1px solid #ecdfcd;padding-bottom:.25em;margin-top:2em}
+h3{font-size:1.15em;margin-top:1.6em}
+a{color:#d9622b;text-decoration:none}a:hover{text-decoration:underline}
+code{background:#f4e9da;padding:.15em .4em;border-radius:5px;font-size:.92em;font-family:Consolas,monospace}
+table{border-collapse:collapse;width:100%;margin:1em 0}
+table td,table th{border:1px solid #ecdfcd;padding:6px 12px;text-align:left}
+table th{background:#f6ede0}
+hr{border:none;border-top:1px solid #ecdfcd;margin:2em 0}
+li{margin:.25em 0}
+.warn{background:#fff3e6;border:1px solid #f0d3ae;border-radius:8px;padding:12px 16px;margin:1em 0}
+blockquote{border-left:4px solid #ecdfcd;margin:0;padding:.1em 1em;color:#8a7a68}
+</style>
+</head>
+<body>
+<h1>🍜 巷口美食通 — 操作手冊</h1>
+<blockquote><p>依你所在區域（目前定位／輸入地址／選捷運站）與餐期，即時查詢 300 公尺／500 公尺／1 公里範圍內的早餐店、咖啡店、餐廳，並依人數、預算、美食類型或自由文字需求給出建議清單。<br>
+主要涵蓋<strong>台北與新北地區</strong>；店家資料來自 Google Places，需自行申請一組 Google Maps API 金鑰才能使用。</p></blockquote>
+<p><strong>創作者：Mark Tsai（蔡豐全）</strong>｜聯絡信箱：<a href="mailto:tsaimark@gmail.com">tsaimark@gmail.com</a></p>
+
+<div class="warn">
+<p>⚠ <strong>本工具僅供教學、課程及個人使用，禁止未經授權公開發布、販售或商業化使用。</strong></p>
+<p>⚠ 店家評分／營業時間／價位資料由 <strong>Google Places API 即時提供</strong>，僅供參考，本工具不保證即時正確，也不對店家實際狀況或消費結果負責，請以店家現場公告與實際狀況為準。</p>
+<p>⚠ 若你有設定 AI 服務金鑰，「推薦理由」段落是 AI 依候選店家清單生成的文字，同樣僅供參考，不構成專業建議；AI 也可能理解錯誤或給出不準確的敘述。</p>
+<p>⚠ 兩把金鑰（Google Maps、AI 服務）都只存在你這台電腦的瀏覽器 localStorage，查詢時會直接連線到 Google 與你選擇的 AI 服務商，不經過本工具以外的任何伺服器；請勿在共用電腦上填寫金鑰。</p>
+</div>
+<hr>
+
+<h2 id="快速開始">快速開始</h2>
+<ol>
+<li>按右上角「⚙️」打開設定，貼上你申請好的 <strong>Google Maps API 金鑰</strong>（必填，見下方「申請 Google Maps API 金鑰」）</li>
+<li>若想使用 AI 理解自由文字需求與產生推薦理由，選擇 AI 服務商並貼上該服務商的 API 金鑰（選填，不填也能正常使用）</li>
+<li>按「儲存設定」</li>
+<li>選餐期、所在區域取得方式、搜尋半徑，視需要調整人數／預算／美食類型／自由文字，按「開始搜尋」</li>
+</ol>
+
+<h2 id="申請金鑰">申請 Google Maps API 金鑰</h2>
+<ol>
+<li>到 <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a> 建立一個專案（或使用既有專案）</li>
+<li>在「APIs 與服務」啟用以下兩個 API：<strong>Maps JavaScript API</strong> 與 <strong>Places API (New)</strong></li>
+<li>設定帳單帳戶（Google 提供每月免費使用額度，一般個人查詢用量通常在額度內；實際費用與額度請查 Google Cloud 官方定價頁面，本工具不會經手、也不會向你收取任何費用）</li>
+<li>在「憑證」建立一組 API 金鑰，並建議設定 <strong>HTTP referrer 限制</strong>（限制只有你使用的網址能呼叫這把金鑰，避免外流被盜用）</li>
+<li>把金鑰貼到本工具的設定面板</li>
+</ol>
+<div class="warn">如果搜尋時出現「金鑰驗證失敗」或「請求被拒絕」，最常見原因是上面兩個 API 沒有都開通、帳單未設定，或 HTTP referrer 限制沒有涵蓋你目前開啟這個頁面的網址。</div>
+
+<h2 id="所在區域">所在區域怎麼設定</h2>
+<table>
+<tr><th>方式</th><th>說明</th></tr>
+<tr><td>📍 使用目前定位</td><td>呼叫瀏覽器定位功能，需允許瀏覽器的定位權限；手機與桌機瀏覽器都支援，室內或訊號不佳時可能不準確或失敗</td></tr>
+<tr><td>🏠 輸入地址／地標</td><td>打入任意地址或地標名稱，按「定位」由 Google 轉換成座標；適合已知確切地址時使用</td></tr>
+<tr><td>🚇 選捷運站</td><td>從台北捷運＋新北捷運（環狀線／安坑輕軌／淡海輕軌）共 138 站中選一個，以該站為搜尋中心；站點座標僅供搜尋中心使用，非精確出入口位置</td></tr>
+</table>
+
+<h2 id="搜尋條件">搜尋條件說明</h2>
+<ul>
+<li><strong>餐期</strong>：早餐／午餐／晚餐，會影響預設搜尋的店家類型（例如早餐會一併納入早午餐、烘焙、咖啡類型）</li>
+<li><strong>搜尋半徑</strong>：300 公尺／500 公尺／1 公里，為 Google Places 的硬性距離限制，不會出現超出範圍的店家</li>
+<li><strong>參考人數</strong>：目前作為推薦理由的判斷脈絡（例如人數較多時提醒你留意是否可併桌／訂位），Google 沒有「依人數篩選店家」的資料可用</li>
+<li><strong>只看目前營業中</strong>：勾選後只顯示 Google 判斷目前有營業的店家；此欄位資料同樣可能有缺漏或未即時更新</li>
+<li><strong>預算</strong>：對應 Google 的價位等級（平價／中等／高價），台灣店家的價位資料常缺漏，未提供價位的店家不會被排除</li>
+<li><strong>美食類型</strong>：可複選，其中「咖啡店／烘焙／日式／中式」會直接篩選 Google 的店家分類，其餘（火鍋／麵食／西式／素食／小吃）與自由文字需求則用來比對店名與分類</li>
+<li><strong>我的需求</strong>：自由文字，例如「想吃辣的、不要排隊、想找適合聚餐的空間」；有設定 AI 金鑰時會先讓 AI 理解這段文字，沒有的話會直接拿去做關鍵字比對</li>
+</ul>
+
+<h2 id="AI功能">AI 功能說明（選用）</h2>
+<p>設定 AI 服務商與金鑰後，多兩個功能：</p>
+<ol>
+<li><strong>理解自由文字需求</strong>：把「我的需求」欄位的自然語言，轉換成幾個具體關鍵字，用來輔助判斷候選店家</li>
+<li><strong>產生推薦理由</strong>：從查詢到的候選店家中，挑出最多 5 家最適合的，並各寫一句白話推薦理由，標示「AI 推薦」排在清單最前面</li>
+</ol>
+<p>AI <strong>只會從 Google 查到的候選清單裡挑選</strong>，不會憑空編造清單以外的店家；若 AI 呼叫失敗（金鑰錯誤、額度用盡、服務暫時異常等），會顯示提示訊息並自動改用一般排序與規則式推薦理由，不影響基本查詢功能。</p>
+
+<h2 id="常見問題">常見問題</h2>
+<h3>搜尋不到店家怎麼辦？</h3>
+<p>試著放寬搜尋半徑、拿掉部分美食類型或預算篩選，或換一個位置再搜尋一次；市郊、住宅區或深夜時段附近店家本來就可能較少。</p>
+<h3>為什麼有些店家沒有評分或價位？</h3>
+<p>這些欄位由 Google Places 提供，資料完整度取決於店家自己或使用者是否曾在 Google 地圖上填寫，本工具無法補齊缺漏資料，缺漏的欄位也不會用來排除店家。</p>
+<h3>定位一直失敗？</h3>
+<p>確認瀏覽器的網站定位權限已允許；室內、地下室或行動網路訊號不佳時定位可能不準或逾時，可改用「輸入地址」或「選捷運站」。</p>
+
+<h2 id="隱私說明">隱私說明</h2>
+<ul>
+<li>Google Maps API 金鑰與 AI 服務金鑰都只存在你自己瀏覽器的 localStorage，關閉分頁後下次打開仍會保留，但不會傳送到本工具以外的任何伺服器；換一台電腦或清除瀏覽器資料就會不見</li>
+<li>查詢地點時會直接連線到 Google Places／Maps 官方 API；若使用 AI 功能，「我的需求」文字與候選店家清單（不含你的個人資訊）會直接連線送到你選擇的 AI 服務商，兩者皆不經過本工具作者或任何第三方伺服器</li>
+<li>本工具不會記錄或上傳你的搜尋紀錄、定位座標或任何查詢內容</li>
+</ul>
+
+<h2 id="使用警語">使用警語</h2>
+<div class="warn">
+<strong>請注意：</strong>
+<ul>
+<li>本工具僅為查詢輔助，不對店家實際營業狀況、菜色品質、衛生條件、價位或服務負責，請以現場實際狀況為準</li>
+<li>使用 Google Maps／Places API 與 AI 服務所產生的費用，依你自己申請的方案計算，本工具不會向你收費，也不會經手你的帳單</li>
+<li>請勿在共用或公用電腦上填寫任一把 API 金鑰</li>
+<li>本工具與創作者不對依本工具建議所做的消費決策或任何後續結果負責</li>
+</ul>
+</div>
+
+<h2>創作者資料</h2>
+<p><strong>Mark Tsai（蔡豐全）</strong></p>
+<p>聯絡信箱：<a href="mailto:tsaimark@gmail.com">tsaimark@gmail.com</a></p>
+
+<h3>專長</h3>
+<p>銷售數據分析、AI 工具運用、政府補助計畫申請、創業、跨境電商</p>
+
+<h3>證照</h3>
+<ul>
+<li>青創總會 創業輔導顧問師班（2013）</li>
+<li>青創總會 網路行銷講師培訓班（2014）</li>
+<li>阿里巴巴 P4P 認證講師（2016）</li>
+<li>iCap 訓練規劃與評量職能基準課程（2017）</li>
+<li>iCap 職能導向課程申請認證實作班（2023）</li>
+<li>iPAS AI 應用規劃師－初級（2025）</li>
+<li>新北市社會局社區數位陪伴員（2025）</li>
+</ul>
+
+<h3>經歷</h3>
+<ul>
+<li>勞動力發展署桃竹苗分署 創業顧問（2017－迄今）</li>
+<li>勞動力發展署（北北基）小型企業人力提升計畫 顧問（2019－迄今）</li>
+<li>勞動力發展署（桃竹苗）小型企業人力提升計畫 顧問（2019－迄今）</li>
+<li>農業部農業科技司「科技農企業雙軸轉型躍升發展」科技計畫 業師（2025－2026）</li>
+<li>勞動力發展署 企業人力資源提升計畫 審查委員（2024）</li>
+<li>勞動力發展署 職前訓練評鑑計畫 委員（2022）</li>
+<li>勞動部桃竹苗分署－桃竹苗區域運籌人力資源整合服務計畫 顧問（2022－2023）</li>
+<li>經濟部中小企業處 SBIR 海選專案 評審委員（2019－2024）</li>
+<li>勞動力發展署 數位學習課程清單審查會議 審查委員（2024－2025）</li>
+<li>輔仁大學創新跨領域學院 課務委員（2024－2025）</li>
+<li>台北市進出口商業同業公會 跨境電商生態村 顧問</li>
+<li>台灣網商協會 顧問</li>
+<li>中華職能開發策進會 顧問（2018－2020）</li>
+<li>新北市汽車美容人員職業工會 顧問（2023－迄今）</li>
+<li>中華網路行銷講師協會 顧問（2022－迄今）</li>
+<li>新北市社企電商基地 輔導顧問（2018－2020）</li>
+<li>阿里巴巴國際站平台 認證講師（2016）</li>
+<li>巨匠電腦 跨境電子商務班 講師（2016－2017）</li>
+</ul>
+
+<h2>授權與使用限制</h2>
+<p>本工具僅供<strong>教學、課程及個人使用</strong>，禁止未經授權公開發布、販售或商業化使用。如需其他用途，請先取得創作者授權。</p>
+
+<hr>
+<p style="text-align:center;color:#8a7a68;font-size:.85em">製作：Mark Tsai｜<a href="index.html">回到巷口美食通</a></p>
+
+</body>
+</html>
