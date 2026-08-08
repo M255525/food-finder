@@ -51,4 +51,8 @@
 
 port **8787**（定義於 `.claude/launch.json`，名稱 `food-finder`）。以 Preview MCP 的 `preview_start` 啟動，或 `python -m http.server 8787 --directory 小工具/food-finder`。
 
+## 正式部署
+
+GitHub Pages，公開 repo <https://github.com/M255525/food-finder>，網址 <https://m255525.github.io/food-finder/>（`main` branch 名稱其實是 `master`，`/` 根目錄）。`README.md` 面向 GitHub 訪客，內容與 `manual.html` 有重疊但角色不同——README 是給「決定要不要用」的人看的簡短總覽，manual.html 是給「已經在用」的人看的完整操作手冊，兩邊都要維護但不用逐字同步。改完 `index.html`／`manual.html`／`mrt-stations-data.js` 後記得 `git push`（GitHub Pages 會自動重新部署，通常一兩分鐘內生效）。repo 是公開的，但只有程式碼——使用者的搜尋條件與 API 金鑰只存在自己瀏覽器的 localStorage，不會出現在 repo 裡。
+
 **測試時注意**：用一把格式正確但無效的金鑰（例如 `sk-ant-fake-test-key`）對著真實服務商端點打，可以驗證錯誤處理路徑（例如 Claude 會回傳真實的 401 `invalid x-api-key`），不需要一把真的有額度的金鑰就能確認請求格式與錯誤訊息顯示正確；但無法驗證 AI 實際生成內容的品質與 JSON 格式穩定性，這部分需要一把真的金鑰實測。
