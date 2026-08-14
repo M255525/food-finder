@@ -6,7 +6,11 @@
 <title>巷口美食通</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#c8551f">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="巷口美食通">
 <style>
 :root{
   --bg:#fdf7ef; --panel:#ffffff; --ink:#241b10; --muted:#6c5c48; --line:#e6d5bd;
@@ -366,6 +370,18 @@ footer.foot{text-align:center;color:var(--muted);font-size:.92rem;padding:22px 1
   var deferredPrompt = null;
   var btn = document.getElementById("installBtn");
 
+  var ua = navigator.userAgent || "";
+  var isIOSDevice = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  var isMacDesktop = /Macintosh/.test(ua) && !isIOSDevice;
+  var isSafariEngine = /^((?!chrome|crios|fxios|edgios|android).)*safari/i.test(ua);
+  var isStandalone = (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || window.navigator.standalone === true;
+
+  function fallbackMessage() {
+    if (isIOSDevice) return "請點畫面上的「分享」圖示，選「加入主畫面」";
+    if (isMacDesktop && isSafariEngine) return "請用選單列「檔案」→「加入 Dock」（Safari 17 以上）";
+    return "目前瀏覽器不支援安裝，或已安裝過";
+  }
+
   window.addEventListener("beforeinstallprompt", function (e) {
     e.preventDefault();
     deferredPrompt = e;
@@ -375,14 +391,19 @@ footer.foot{text-align:center;color:var(--muted);font-size:.92rem;padding:22px 1
   });
 
   if (btn) {
-    btn.addEventListener("click", function () {
-      if (!deferredPrompt) {
-        btn.title = "瀏覽器不支援安裝，或已安裝過";
-        return;
-      }
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then(function () { deferredPrompt = null; });
-    });
+    if (isStandalone) {
+      btn.style.display = "none";
+    } else {
+      btn.addEventListener("click", function () {
+        if (!deferredPrompt) {
+          // 這顆按鈕只有圖示、平常不顯示文字提示，樂齡族群不易注意到 title 提示，改用 alert 確保看得到
+          window.alert(fallbackMessage());
+          return;
+        }
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(function () { deferredPrompt = null; });
+      });
+    }
   }
 
   if ("serviceWorker" in navigator) {
