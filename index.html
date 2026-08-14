@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>巷口美食通</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#c8551f">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
 <style>
 :root{
   --bg:#fdf7ef; --panel:#ffffff; --ink:#241b10; --muted:#6c5c48; --line:#e6d5bd;
@@ -130,6 +133,7 @@ footer.foot{text-align:center;color:var(--muted);font-size:.92rem;padding:22px 1
       <button type="button" data-value="md">中</button>
       <button type="button" data-value="lg">大</button>
     </div>
+    <button id="installBtn" class="icon-btn" title="加入主畫面">📲</button>
     <a href="manual.html" target="_blank" class="manual-link" title="操作手冊">📖 操作手冊</a>
     <button id="settingsBtn" class="icon-btn" title="設定 AI 服務金鑰">⚙️</button>
   </div>
@@ -354,6 +358,38 @@ footer.foot{text-align:center;color:var(--muted);font-size:.92rem;padding:22px 1
       }
     })
     .catch(function () {});
+})();
+</script>
+<script>
+(function () {
+  "use strict";
+  var deferredPrompt = null;
+  var btn = document.getElementById("installBtn");
+
+  window.addEventListener("beforeinstallprompt", function (e) {
+    e.preventDefault();
+    deferredPrompt = e;
+  });
+  window.addEventListener("appinstalled", function () {
+    deferredPrompt = null;
+  });
+
+  if (btn) {
+    btn.addEventListener("click", function () {
+      if (!deferredPrompt) {
+        btn.title = "瀏覽器不支援安裝，或已安裝過";
+        return;
+      }
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(function () { deferredPrompt = null; });
+    });
+  }
+
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("service-worker.js").catch(function () {});
+    });
+  }
 })();
 </script>
 <script>
