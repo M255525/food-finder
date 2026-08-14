@@ -1,5 +1,5 @@
 // 僅供「加入主畫面」安裝需求使用：network-first + 同源快取備援，不快取跨網域 API 請求。
-const CACHE_NAME = 'food-finder-shell-v1';
+const CACHE_NAME = 'food-finder-shell-v2';
 const SHELL_FILES = [
   './',
   './index.html',
@@ -31,7 +31,7 @@ self.addEventListener('fetch', (event) => {
   if (url.origin !== location.origin) return;
 
   event.respondWith(
-    fetch(event.request)
+    fetch(event.request, { cache: 'reload' })
       .then((res) => {
         const copy = res.clone();
         caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
