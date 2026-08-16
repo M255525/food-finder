@@ -535,8 +535,8 @@ wireSingleChipGroup('locModeGroup', 'locMode', function(mode){
 $('locModeGroup').querySelector('[data-value=address]').classList.add('active');
 $('locAddress').style.display = 'block';
 
-/* ---------- 捷運站資料（僅作為地名清單使用，不做座標計算）：先選路線再選站別，避免138站平鋪選單造成混亂 ---------- */
-var MRT_LINE_ORDER = ['板南線','淡水信義線','松山新店線','中和新蘆線','文湖線','環狀線','安坑輕軌','淡海輕軌'];
+/* ---------- 捷運站資料（僅作為地名清單使用，不做座標計算）：先選路線再選站別，避免149站平鋪選單造成混亂 ---------- */
+var MRT_LINE_ORDER = ['板南線','淡水信義線','松山新店線','中和新蘆線','文湖線','環狀線','安坑輕軌','淡海輕軌','三鶯線'];
 (function initMrtOptions(){
   var list = window.MRT_STATIONS || [];
   var linesPresent = new Set();
