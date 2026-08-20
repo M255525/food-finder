@@ -49,6 +49,8 @@
 
 與 `ai-video-studio` 系列共用同一個授權伺服器與 Google Sheet，做法比照一般頁面（`position:fixed` + `body.has-marquee{padding-top:34px}`，跑馬燈列高度因整體字級放大而加高），`localStorage` key 為 `foodFinderMarquee`。本工具沒有序號登入機制，頁面載入時直接 POST 空序號取得 `marquee` 欄位。
 
+**2026-08-20 更新（`Code.gs` 未改動、不需重新部署）**：`render()` 新增 `lastKey`（`JSON.stringify(items)`）比對，內容沒變就不重繪，CSS animation 不再被重置歸零重跑；新增 `appendParsedText()`／`buildTrackContent()` 支援 `[文字](https://...)` 連結語法（`createTextNode` 組 DOM，避免 XSS），資料格式仍是純字串陣列，向下相容。已 commit＋push（GitHub Pages 自動重新部署）。
+
 ## 瀏覽次數計數器
 
 `#visitCounter`（頁尾）用免費第三方服務 [CountAPI](https://countapi.mileshilliard.com)（`countapi.mileshilliard.com/api/v1/hit/foodfinder_tsaimark_visits`）記錄**累計頁面載入次數**，不是去重後的訪客數，純展示用途、無認證。`localStorage`（key `foodFinderVisitCount`）快取上次讀到的數字，網路請求失敗時靜默顯示快取值或留空，不拋錯。
