@@ -28,6 +28,7 @@ button{font-family:inherit}
 #marqueeBar.show{display:flex}
 #marqueeTrack{display:inline-block;white-space:nowrap;padding-left:100%;font-size:.95rem;font-weight:600;color:var(--accent);animation:marquee-scroll 30s linear infinite}
 body.has-marquee{padding-top:34px}
+#marqueeBar:hover #marqueeTrack{animation-play-state:paused}
 @keyframes marquee-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 .warning-banner{background:#fff3e6;border-bottom:1px solid #f0d3ae;color:#6a3d10;font-size:.95rem;padding:10px 16px;text-align:center;line-height:1.7}
